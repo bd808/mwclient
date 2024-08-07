@@ -145,7 +145,8 @@ class Site:
         self.version = None
 
         self.namespaces = self.default_namespaces
-        self.writeapi = False
+        # T371977: Big fat hack to keep the big fat hacks rolling
+        self.writeapi = True
 
         # Setup connection
         if pool is None:
@@ -217,7 +218,6 @@ class Site:
             namespace['id']: namespace.get('*', '')
             for namespace in meta['query']['namespaces'].values()
         }
-        self.writeapi = 'writeapi' in self.site
 
         self.version = self.version_tuple_from_generator(self.site['generator'])
 
